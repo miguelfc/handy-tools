@@ -9,10 +9,10 @@
 # in a period of time, so keep that in mind and try not to abuse their TOS.
 
 from TwitterSearch import *
-import json, yaml
+import json, yaml, os
 
 try:
-    stream = file('extract.conf', 'r')
+    stream = file(os.path.dirname(os.path.realpath(__file__))+'/extract.conf', 'r')
     configuration = yaml.load(stream);
 
     try:
@@ -31,7 +31,7 @@ try:
     if next_max_id[0] != "":
         tso.setMaxID(int(next_max_id[0]));
     tso.setIncludeEntities(False) 
-    
+        
     ts = TwitterSearch(
         consumer_key = configuration['consumerKey'],
         consumer_secret = configuration['consumerSecret'],
@@ -39,6 +39,7 @@ try:
         access_token_secret = configuration['accessTokenSecret']
      )
 
+    
     # init variables needed in loop
     todo = True
     next_max_id = 0
@@ -64,8 +65,8 @@ try:
 
             # Uncomment only if you need to interrupt the extraction 
             # of tweet older than a timestamp
-            if tweet_id  <= configuration['oldestTweetTimestamp']:
-                exit;
+            if tweet_id  <= int(configuration['oldestTweetTimestamp']):
+                exit();
             
             json.dump(tweet, ftweets);
             ftweets.write(",\n");
