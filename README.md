@@ -1,6 +1,8 @@
 handy-tools
 ===========
 
-Collection of development tools often used online.
+This project is no longer hosted here. The new location is: https://bitbucket.org/miguelfc/handy-tools
 
-By miguelfc
+Sorry for the inconvenience.
+
+MiguelFC
